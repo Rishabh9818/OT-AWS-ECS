@@ -13,7 +13,6 @@ bp_image_uri=$(echo "$json_data" | jq -r '.addition_meta_data.placeholders[] | s
 bp_image_tag=$(echo "$json_data" | jq -r '.addition_meta_data.placeholders[] | select(.key == "${BP_IMAGE_TAG}") | .value')
 git_url=$(echo "$json_data" | jq -r '.manifest_meta_data.manifest_git_repo.git_url')
 
-
 repo_name=$(basename "$git_url" | sed 's/\.git$//')
 
 # Print the extracted values
@@ -21,6 +20,7 @@ echo "BP_IMAGE_URI: $bp_image_uri"
 echo "BP_IMAGE_TAG: $bp_image_tag"
 echo "Repository Name: $repo_name"
 
+getAssumeRole $IAM_ROLE_TO_ASSUME
 
 cd $WORKSPACE/$repo_name
 
