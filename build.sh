@@ -6,8 +6,7 @@ source /app/buildpiper/shell-functions/file-functions.sh
 source /app/buildpiper/shell-functions/aws-functions.sh
 
 # Store the JSON in a variable
-json_data=`cat /bp/data/deploy_stateless_app`
-
+json_data=`getComponentName`
 # Extract ${BP_IMAGE_URI} and ${BP_IMAGE_TAG} using jq
 bp_image_uri=$(echo "$json_data" | jq -r '.addition_meta_data.placeholders[] | select(.key == "${BP_IMAGE_URI}") | .value')
 bp_image_tag=$(echo "$json_data" | jq -r '.addition_meta_data.placeholders[] | select(.key == "${BP_IMAGE_TAG}") | .value')
